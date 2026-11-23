@@ -1,4 +1,3 @@
-
 import { useEffect, useMemo, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import JubileeData from "../data/jubileeData";
@@ -719,12 +718,12 @@ function DateScene() {
           }
         }
 
-        /* SCRATCH HEART */
+        /* SCRATCH HEART — CONSISTENT MOBILE POSITION */
 
         .scratch-card-position {
           position: absolute;
           z-index: 5;
-          top: 28%;
+          top: 27%;
           left: 0;
           width: 100%;
           display: flex;
@@ -734,7 +733,7 @@ function DateScene() {
 
         .scratch-heart {
           position: relative;
-          width: min(260px, 68vw, 34svh);
+          width: min(250px, 67vw, 33svh);
           aspect-ratio: 240 / 220;
           height: auto;
           flex-shrink: 0;
@@ -756,7 +755,7 @@ function DateScene() {
 
         .heart-glitter {
           color: #fff;
-          font-size: clamp(15px, 5vw, 19px);
+          font-size: clamp(13px, 4.5vw, 19px);
           letter-spacing: 5px;
           text-shadow: 0 0 8px #fff, 0 0 14px #fff;
         }
@@ -764,13 +763,12 @@ function DateScene() {
         .heart-title {
           margin-top: 5px;
           font-family: 'Cormorant Garamond', serif;
-          font-size: clamp(16px, 5vw, 20px);
+          font-size: clamp(15px, 4.8vw, 20px);
           font-weight: 700;
-          letter-spacing: 0.03em;
         }
 
         .heart-date {
-          font-size: clamp(17px, 5.2vw, 21px);
+          font-size: clamp(16px, 5vw, 21px);
           font-weight: 900;
           letter-spacing: 0.22em;
         }
@@ -784,12 +782,10 @@ function DateScene() {
 
         .heart-tap {
           color: #123b8a;
-          font-size: clamp(7px, 2.3vw, 9px);
+          font-size: clamp(6px, 2.2vw, 9px);
           font-weight: 900;
           letter-spacing: 0.13em;
-          text-shadow:
-            0 1px 0 rgba(255,255,255,0.98),
-            0 0 5px rgba(255,255,255,0.85);
+          text-shadow: 0 1px 0 #fff, 0 0 5px rgba(255,255,255,0.85);
         }
 
         .scratch-canvas {
@@ -811,15 +807,14 @@ function DateScene() {
         }
 
         .scratch-instruction {
-          margin-top: 8px;
+          margin-top: 5px;
           color: #123b8a;
-          font-size: clamp(8px, 2.5vw, 10px);
+          font-size: clamp(7px, 2.2vw, 9px);
           font-weight: 900;
-          letter-spacing: 0.16em;
+          letter-spacing: 0.13em;
           text-align: center;
-          text-shadow:
-            0 1px 0 rgba(255,255,255,0.95),
-            0 0 7px rgba(255,255,255,0.8);
+          text-shadow: 0 1px 0 #fff, 0 0 7px rgba(255,255,255,0.8);
+          padding-inline: 8px;
         }
 
         /* FIREWORKS */
@@ -827,7 +822,7 @@ function DateScene() {
         .date-fireworks {
           position: absolute;
           z-index: 8;
-          top: 32%;
+          top: 30%;
           left: 50%;
           width: 1px;
           height: 1px;
@@ -868,11 +863,10 @@ function DateScene() {
         .calendar-month {
           margin-bottom: 4px;
           font-family: 'Cormorant Garamond', serif;
-          font-size: clamp(12px, 3.4vw, 16px);
+          font-size: clamp(11px, 3.4vw, 16px);
           line-height: 1.1;
           font-weight: 900;
           color: #55404b;
-          text-align: center;
           text-shadow: 0 1px 2px #fff;
         }
 
@@ -888,15 +882,13 @@ function DateScene() {
         .calendar-weekdays {
           margin-bottom: 3px;
           color: #78616a;
-          font-size: clamp(7px, 1.8vw, 9px);
+          font-size: clamp(6px, 1.8vw, 9px);
           line-height: 1;
           font-weight: 900;
-          text-align: center;
         }
 
         .calendar-days {
-          grid-auto-rows: clamp(15px, 3.8vw, 19px);
-          row-gap: 0;
+          grid-auto-rows: clamp(14px, 3.8vw, 19px);
         }
 
         .calendar-day {
@@ -904,14 +896,13 @@ function DateScene() {
           display: flex;
           align-items: center;
           justify-content: center;
-          width: clamp(13px, 3.5vw, 17px);
-          height: clamp(13px, 3.5vw, 17px);
+          width: clamp(12px, 3.5vw, 17px);
+          height: clamp(12px, 3.5vw, 17px);
           color: #574a50;
-          font-size: clamp(8px, 2vw, 10px);
+          font-size: clamp(7px, 2vw, 10px);
           line-height: 1;
           font-weight: 800;
           border-radius: 50%;
-          text-align: center;
           text-shadow: 0 1px 2px #fff;
         }
 
@@ -920,7 +911,6 @@ function DateScene() {
           color: #fff !important;
           background: linear-gradient(145deg, #8c7188, #4c4057);
           box-shadow: 0 0 0 1px #fff, 0 0 7px rgba(255,255,255,0.95);
-          text-shadow: 0 1px 2px #403044;
         }
 
         .selected-day-glow {
@@ -938,7 +928,7 @@ function DateScene() {
         .date-reveal-details {
           position: absolute;
           z-index: 4;
-          top: 53.5%;
+          top: 49.5%;
           left: 8%;
           width: 84%;
           min-height: 9.5%;
@@ -952,19 +942,18 @@ function DateScene() {
         }
 
         .date-small-heading {
-          font-size: clamp(8px, 2.5vw, 11px);
+          font-size: clamp(7px, 2.5vw, 11px);
           font-weight: 900;
-          letter-spacing: 0.22em;
+          letter-spacing: 0.2em;
           line-height: 1.2;
           color: #766071;
-          text-align: center;
         }
 
         .date-main-text {
           width: 100%;
           margin-top: 3px;
           font-family: 'Cormorant Garamond', serif;
-          font-size: clamp(19px, 5.7vw, 33px);
+          font-size: clamp(17px, 5.7vw, 33px);
           font-weight: 900;
           line-height: 1.15;
           color: #493747;
@@ -974,10 +963,12 @@ function DateScene() {
         }
 
         .date-event-time {
+          position: relative;
+          top: -3px;
           margin-top: 3px;
-          font-size: clamp(8px, 2.5vw, 11px);
+          font-size: clamp(7px, 2.5vw, 11px);
           font-weight: 900;
-          letter-spacing: 0.06em;
+          letter-spacing: 0.04em;
           line-height: 1.3;
           color: #685365;
           text-align: center;
@@ -988,17 +979,17 @@ function DateScene() {
           color: #a58a65;
         }
 
-        /* COUNTDOWN - RESPONSIVE BOX ALIGNMENT */
+        /* COUNTDOWN */
 
         .date-countdown {
           position: absolute;
           z-index: 4;
-          top: 65%;
+          top: 61.5%;
           left: 15%;
           width: 69%;
           display: grid;
           grid-template-columns: repeat(4, minmax(0, 1fr));
-          gap: clamp(2px, 0.8vw, 7px);
+          gap: 1.33%;
           align-items: center;
           text-align: center;
           box-sizing: border-box;
@@ -1008,13 +999,13 @@ function DateScene() {
           box-sizing: border-box;
           min-width: 0;
           width: 100%;
-          height: clamp(42px, 11svh, 60px);
+          height: clamp(40px, 11svh, 60px);
           display: flex;
           flex-direction: column;
           align-items: center;
           justify-content: center;
           text-align: center;
-          padding: 5px 2px 0 7px;
+          padding: 0;
           gap: 4px;
           overflow: hidden;
         }
@@ -1024,7 +1015,7 @@ function DateScene() {
           width: 100%;
           min-width: 0;
           font-family: 'Montserrat', sans-serif;
-          font-size: clamp(11px, 3.4vw, 19px);
+          font-size: clamp(10px, 3.4vw, 19px);
           line-height: 1;
           font-weight: 900;
           color: #51414f;
@@ -1032,7 +1023,7 @@ function DateScene() {
           text-shadow: 0 1px 3px #fff;
           font-variant-numeric: tabular-nums;
           white-space: nowrap;
-          letter-spacing: -0.035em;
+          letter-spacing: -0.04em;
         }
 
         .countdown-label {
@@ -1049,7 +1040,7 @@ function DateScene() {
           white-space: nowrap;
         }
 
-        /* 25 YEARS OF LOVE */
+        /* ANNIVERSARY MESSAGE */
 
         .date-bottom-message {
           position: absolute;
@@ -1059,9 +1050,9 @@ function DateScene() {
           width: 84%;
           text-align: center;
           color: #685366;
-          font-size: clamp(9px, 2.8vw, 13px);
+          font-size: clamp(8px, 2.8vw, 13px);
           font-weight: 900;
-          letter-spacing: 0.15em;
+          letter-spacing: 0.13em;
           text-shadow: 0 1px 3px #fff;
         }
 
@@ -1102,32 +1093,17 @@ function DateScene() {
         /* TABLETS AND DESKTOP */
 
         @media (min-width: 700px) {
-          .scratch-card-position {
-            top: 24%;
-          }
-
           .scratch-heart {
-            width: min(240px, 30svh);
-          }
-
-          .revealed-calendar {
-            width: 145px;
-          }
-
-          .date-reveal-details {
-            top: 53.5%;
+            width: min(250px, 33svh);
           }
 
           .date-countdown {
-            top: 65%;
             left: 20%;
             width: 60%;
-            gap: 5px;
           }
 
           .countdown-item {
             height: 60px;
-            padding: 5px 3px 0 7px;
           }
 
           .countdown-value {
@@ -1141,101 +1117,9 @@ function DateScene() {
           .date-main-text {
             font-size: 34px;
           }
-
-          .date-bottom-message {
-            top: 79%;
-          }
-
-          .date-scroll-prompt {
-            font-size: 7px;
-          }
         }
 
-        /* SHORT MOBILE SCREENS */
-
-        @media (max-height: 700px) and (max-width: 699px) {
-          .scratch-card-position {
-            top: 25%;
-          }
-
-          .scratch-heart {
-            width: min(220px, 29svh, 65vw);
-          }
-
-          .calendar-position {
-            top: 27%;
-          }
-
-          .date-reveal-details {
-            top: 50%;
-          }
-
-          .date-countdown {
-            top: 61%;
-          }
-
-          .date-bottom-message {
-            top: 76%;
-          }
-
-          .date-scroll-prompt {
-            bottom: max(1%, env(safe-area-inset-bottom));
-            font-size: 5px;
-          }
-
-          .date-scroll-arrow {
-            font-size: 16px;
-          }
-        }
-
-        /* VERY NARROW PHONES */
-
-        @media (max-width: 350px) {
-          .scratch-card-position {
-            top: 28%;
-          }
-
-          .scratch-heart {
-            width: min(210px, 65vw, 32svh);
-          }
-
-          .date-reveal-details {
-            top: 53%;
-          }
-
-          .date-countdown {
-            top: 64%;
-            left: 7%;
-            width: 86%;
-            gap: 2px;
-          }
-
-          .countdown-item {
-            padding: 4px 1px 0 5px;
-          }
-
-          .countdown-value {
-            font-size: clamp(10px, 3.2vw, 13px);
-            letter-spacing: -0.045em;
-          }
-
-          .countdown-label {
-            font-size: clamp(4.5px, 1.45vw, 6px);
-            letter-spacing: 0;
-          }
-
-          .date-main-text {
-            font-size: clamp(17px, 5.5vw, 23px);
-          }
-
-          .date-bottom-message {
-            top: 81%;
-          }
-
-          .date-scroll-prompt {
-            font-size: 5px;
-          }
-        }
+        /* REDUCED MOTION */
 
         @media (prefers-reduced-motion: reduce) {
           .background-sparkle {

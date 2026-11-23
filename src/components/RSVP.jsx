@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import JubileeData from "../data/jubileeData";
@@ -316,10 +315,10 @@ function RSVP() {
           background-size: 100% 100%;
         }
 
-        /* EXISTING GREETING PANEL */
+        /* GREETING PANEL — MOVED SLIGHTLY DOWN */
         .rsvp-greeting-box {
           position: absolute;
-          top: 39%;
+          top: 41%;
           left: 19%;
           width: 62%;
           height: 17%;
@@ -452,9 +451,7 @@ function RSVP() {
           color: #f5dfbd;
         }
 
-        /* =====================================
-           THANK YOU POPUP
-        ===================================== */
+        /* THANK YOU POPUP */
 
         .thankyou-overlay {
           position: fixed;
@@ -648,9 +645,7 @@ function RSVP() {
           }
         }
 
-        /* =====================================
-           INVITATION CARD POPUP
-        ===================================== */
+        /* INVITATION CARD POPUP */
 
         .rsvp-popup-overlay {
           position: fixed;
@@ -809,7 +804,7 @@ function RSVP() {
         /* SHORT SCREENS */
         @media (max-height: 700px) {
           .rsvp-greeting-box {
-            top: 39%;
+            top: 41%;
             height: 19%;
           }
 

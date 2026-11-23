@@ -22,6 +22,7 @@ function Welcome() {
     <section className="jubilee-welcome">
       <div className="welcome-artwork" />
 
+      {/* COUPLE PHOTO */}
       <div className="welcome-photo-position">
         <motion.div
           className="welcome-photo"
@@ -40,6 +41,7 @@ function Welcome() {
         </motion.div>
       </div>
 
+      {/* COUPLE NAMES RIBBON */}
       <motion.div
         className="welcome-ribbon"
         initial={{ opacity: 0, y: 12 }}
@@ -76,6 +78,7 @@ function Welcome() {
         </svg>
       </motion.div>
 
+      {/* ANNIVERSARY PODIUM */}
       <div className="welcome-podium">
         <motion.div
           className="podium-number-wrap"
@@ -110,6 +113,7 @@ function Welcome() {
         </motion.span>
       </div>
 
+      {/* SCROLL INDICATOR */}
       <motion.div
         className="welcome-scroll"
         initial={{ opacity: 0 }}
@@ -144,7 +148,16 @@ function Welcome() {
           background: #302932;
           font-family: 'Montserrat', sans-serif;
           contain: layout paint;
+          box-sizing: border-box;
         }
+
+        .jubilee-welcome *,
+        .jubilee-welcome *::before,
+        .jubilee-welcome *::after {
+          box-sizing: border-box;
+        }
+
+        /* BACKGROUND */
 
         .welcome-artwork {
           position: absolute;
@@ -156,11 +169,11 @@ function Welcome() {
           background-repeat: no-repeat;
         }
 
-        /* BIGGER COUPLE PHOTO - MOVED LOWER */
+        /* VERTICAL OVAL COUPLE PHOTO */
 
         .welcome-photo-position {
           position: absolute;
-          top: 35%;
+          top: 31%;
           left: 0;
           width: 100%;
           display: flex;
@@ -170,13 +183,15 @@ function Welcome() {
         }
 
         .welcome-photo {
-          width: clamp(150px, min(70vw, 38svh), 290px);
-          aspect-ratio: 1 / 1;
+          width: clamp(138px, min(61vw, 32vh), 290px);
+          aspect-ratio: 0.86 / 1;
           flex-shrink: 0;
           overflow: hidden;
           border-radius: 50%;
           background: transparent;
-          box-shadow: 0 0 0 1px rgba(246, 220, 178, 0.55);
+          box-shadow:
+            0 0 0 1px rgba(246, 220, 178, 0.55),
+            0 5px 20px rgba(0, 0, 0, 0.12);
         }
 
         .welcome-photo img {
@@ -189,14 +204,14 @@ function Welcome() {
           border-radius: 50%;
         }
 
-        /* SILVER RIBBON */
+        /* NAMES RIBBON - MOVED UP */
 
         .welcome-ribbon {
           position: absolute;
-          top: 65.5%;
+          top: 63.5%;
           left: 0;
           width: 100%;
-          height: clamp(55px, 11svh, 90px);
+          height: clamp(55px, 9.5vh, 90px);
           z-index: 5;
           pointer-events: none;
         }
@@ -219,11 +234,11 @@ function Welcome() {
           stroke-linejoin: round;
         }
 
-        /* ANNIVERSARY PODIUM */
+        /* ANNIVERSARY PODIUM - MOVED UP */
 
         .welcome-podium {
           position: absolute;
-          top: 76.5%;
+          top: 72%;
           left: 0;
           width: 100%;
           display: flex;
@@ -245,7 +260,7 @@ function Welcome() {
         .podium-number {
           display: block;
           font-family: 'Cormorant Garamond', serif;
-          font-size: clamp(48px, min(17vw, 12svh), 84px);
+          font-size: clamp(43px, min(17vw, 12vh), 84px);
           font-weight: 700;
           line-height: 0.9;
           letter-spacing: -3px;
@@ -257,27 +272,29 @@ function Welcome() {
         }
 
         .podium-title {
-          margin-top: clamp(3px, 0.8svh, 6px);
+          margin-top: clamp(3px, 0.8vh, 6px);
           font-family: 'Cormorant Garamond', serif;
-          font-size: clamp(12px, 4.2vw, 20px);
+          font-size: clamp(11px, 4.2vw, 20px);
           font-weight: 700;
-          letter-spacing: clamp(0.1em, 0.18em, 0.18em);
+          letter-spacing: 0.16em;
           text-transform: uppercase;
           color: #142541;
           text-shadow: 0 1px 2px rgba(255,255,255,0.95);
           max-width: 100%;
           overflow-wrap: anywhere;
+          line-height: 1.15;
         }
 
         .podium-tagline {
           margin-top: 4px;
           font-family: 'Cormorant Garamond', serif;
-          font-size: clamp(15px, 4vw, 20px);
-          font-weight: 600;
+          font-size: clamp(28px, 4vw, 20px);
+          font-weight: 700;
           color: #263957;
           text-shadow: 0 1px 2px rgba(255,255,255,0.95);
           max-width: 100%;
           overflow-wrap: anywhere;
+          line-height: 1.2;
         }
 
         /* SCROLL INDICATOR */
@@ -299,6 +316,8 @@ function Welcome() {
           letter-spacing: 0.14em;
           text-shadow: 0 1px 2px rgba(255,255,255,0.95);
           pointer-events: none;
+          text-align: center;
+          padding-inline: 8px;
         }
 
         .scroll-arrow {
@@ -308,106 +327,28 @@ function Welcome() {
           color: #142541;
         }
 
-        /* DESKTOP */
+        /* SHORT SCREENS */
 
-        @media (min-width: 700px) {
-          .welcome-photo-position {
-            top: 34%;
-          }
-
+        @media (max-height: 650px) {
           .welcome-photo {
-            width: min(32vw, 340px, 38svh);
+            width: clamp(115px, min(54vw, 27vh), 220px);
           }
 
           .welcome-ribbon {
-            top: 65.5%;
-            height: 90px;
-          }
-
-          .ribbon-name {
-            font-size: 35px;
+            top: 62%;
+            height: 55px;
           }
 
           .welcome-podium {
-            top: 76%;
+            top: 73%;
           }
 
           .podium-number {
-            font-size: 84px;
-          }
-
-          .podium-title {
-            font-size: 20px;
-          }
-
-          .podium-tagline {
-            font-size: 18px;
-          }
-        }
-
-        /* SHORT MOBILE SCREENS */
-
-        @media (max-height: 700px) and (max-width: 699px) {
-          .welcome-photo-position {
-            top: 32%;
-          }
-
-          .welcome-photo {
-            width: clamp(125px, min(60vw, 31svh), 225px);
-          }
-
-          .welcome-ribbon {
-            top: 62.5%;
-            height: 60px;
-          }
-
-          .welcome-podium {
-            top: 72%;
-          }
-
-          .podium-number {
-            font-size: clamp(43px, 13vw, 65px);
+            font-size: clamp(40px, min(15vw, 10vh), 65px);
           }
 
           .welcome-scroll {
             bottom: max(0.5%, env(safe-area-inset-bottom));
-          }
-        }
-
-        /* EXTRA NARROW PHONES */
-
-        @media (max-width: 350px) {
-          .welcome-photo-position {
-            top: 32%;
-          }
-
-          .welcome-photo {
-            width: clamp(120px, 60vw, 190px);
-          }
-
-          .welcome-ribbon {
-            top: 64%;
-          }
-
-          .ribbon-name {
-            font-size: 21px;
-          }
-
-          .welcome-podium {
-            top: 74%;
-          }
-
-          .podium-number {
-            font-size: 48px;
-          }
-
-          .podium-title {
-            font-size: 12px;
-            letter-spacing: 0.12em;
-          }
-
-          .podium-tagline {
-            font-size: 15px;
           }
         }
 
