@@ -173,7 +173,7 @@ function Welcome() {
 
         .welcome-photo-position {
           position: absolute;
-          top: 31%;
+          top: 29.4%;
           left: 0;
           width: 100%;
           display: flex;
