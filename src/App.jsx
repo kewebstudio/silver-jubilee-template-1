@@ -21,7 +21,6 @@ function App() {
     const app = appRef.current;
     if (!app) return;
 
-    // Keep the entrance screen fixed with no scrolling.
     if (!showInvitation) {
       app.scrollTop = 0;
       app.style.overflowY = "hidden";
@@ -29,7 +28,6 @@ function App() {
       return;
     }
 
-    // Enable scrolling after entering the invitation.
     app.style.overflowY = "auto";
     app.style.scrollBehavior = "smooth";
 
@@ -40,7 +38,6 @@ function App() {
       if (lockedRef.current) return;
 
       lockedRef.current = true;
-
       app.style.overflowY = "hidden";
       app.style.scrollBehavior = "auto";
     };
@@ -49,7 +46,6 @@ function App() {
       if (!lockedRef.current) return;
 
       lockedRef.current = false;
-
       app.style.overflowY = "auto";
       app.style.scrollBehavior = "smooth";
     };
@@ -60,23 +56,14 @@ function App() {
       const dateScene = dateSceneRef.current;
       if (!dateScene) return;
 
-      // Do not lock if the date has already been revealed.
-      if (dateScene.classList.contains("date-revealed")) {
-        return;
-      }
+      if (dateScene.classList.contains("date-revealed")) return;
 
       const appRect = app.getBoundingClientRect();
       const dateRect = dateScene.getBoundingClientRect();
-
-      // Detect when the Date scene reaches the top
-      // of the actual scrolling container.
       const distanceFromTop = dateRect.top - appRect.top;
 
       if (distanceFromTop <= 1) {
-        // Align the Date scene exactly at the top.
         app.scrollTop += distanceFromTop;
-
-        // Stop all further page scrolling.
         lockScrolling();
       }
     };
@@ -91,10 +78,7 @@ function App() {
     const preventTouchScroll = (event) => {
       if (!lockedRef.current) return;
 
-      // Keep the scratch canvas interaction available.
-      if (event.target.closest?.(".scratch-canvas")) {
-        return;
-      }
+      if (event.target.closest?.(".scratch-canvas")) return;
 
       event.preventDefault();
       event.stopPropagation();
@@ -134,7 +118,6 @@ function App() {
 
       if (!dateSceneRef.current) return;
 
-      // Watch the Date scene for the scratch reveal.
       mutationObserver = new MutationObserver(checkReveal);
 
       mutationObserver.observe(dateSceneRef.current, {
@@ -142,12 +125,10 @@ function App() {
         attributeFilter: ["class"],
       });
 
-      // Detect when the Date scene reaches the top.
       app.addEventListener("scroll", checkDatePosition, {
         passive: true,
       });
 
-      // Block mouse, touch and keyboard scrolling while locked.
       window.addEventListener("wheel", preventWheel, {
         passive: false,
         capture: true,
@@ -158,13 +139,8 @@ function App() {
         capture: true,
       });
 
-      window.addEventListener(
-        "keydown",
-        preventKeyboardScroll,
-        true
-      );
+      window.addEventListener("keydown", preventKeyboardScroll, true);
 
-      // Also check the initial position.
       checkDatePosition();
     };
 
@@ -172,24 +148,12 @@ function App() {
 
     return () => {
       cancelAnimationFrame(animationFrame);
-
       mutationObserver?.disconnect();
 
       app.removeEventListener("scroll", checkDatePosition);
-
       window.removeEventListener("wheel", preventWheel, true);
-
-      window.removeEventListener(
-        "touchmove",
-        preventTouchScroll,
-        true
-      );
-
-      window.removeEventListener(
-        "keydown",
-        preventKeyboardScroll,
-        true
-      );
+      window.removeEventListener("touchmove", preventTouchScroll, true);
+      window.removeEventListener("keydown", preventKeyboardScroll, true);
 
       app.style.overflowY = "auto";
       app.style.scrollBehavior = "";
@@ -213,29 +177,15 @@ function App() {
         </div>
       ) : (
         <div className="jubilee-invitation">
-
-          {/* Scene 1 - Welcome */}
           <Welcome />
-
-          {/* Scene 2 - Their Love Story */}
           <LoveStory />
-
-          {/* Scene 3 - Interactive Date Scratch Reveal */}
           <DateScene />
-
-          {/* Scene 4 - Silver Jubilee Celebration */}
           <Celebration />
-
-          {/* Scene 5 - Venue Details */}
           <Venue />
-
-          {/* Scene 6 - RSVP and Download Invitation */}
           <RSVP />
-
         </div>
       )}
 
-      {/* Background music stays mounted across all scenes */}
       <MusicToggle />
 
       <style>{`
@@ -247,14 +197,42 @@ function App() {
         body,
         #root {
           width: 100%;
+          min-width: 0;
           height: 100%;
           min-height: 100%;
           margin: 0;
           padding: 0;
         }
 
+        html {
+          overflow: hidden;
+          -webkit-text-size-adjust: 100%;
+          text-size-adjust: 100%;
+        }
+
         body {
           overflow: hidden;
+          overscroll-behavior: none;
+        }
+
+        img,
+        video,
+        canvas,
+        svg {
+          max-width: 100%;
+        }
+
+        img,
+        video {
+          height: auto;
+        }
+
+        button,
+        input,
+        textarea,
+        select {
+          font: inherit;
+          max-width: 100%;
         }
 
         .jubilee-app {
@@ -262,20 +240,25 @@ function App() {
           width: 100%;
           height: 100vh;
           height: 100svh;
+          height: 100dvh;
           min-height: 0;
           margin: 0;
           padding: 0;
-          overflow-x: hidden;
+          overflow-x: clip;
+          overflow-y: hidden;
           background: #302932;
           -webkit-overflow-scrolling: touch;
           overscroll-behavior: none;
+          isolation: isolate;
         }
 
-        /* CLOSED AND OPENING CURTAIN SCREEN */
+        /* ENTRANCE SCREEN */
+
         .jubilee-app.entrance-active {
           width: 100%;
           height: 100vh;
           height: 100svh;
+          height: 100dvh;
           min-height: 0;
           overflow: hidden !important;
           overscroll-behavior: none;
@@ -290,23 +273,26 @@ function App() {
           margin: 0;
           padding: 0;
           overflow: hidden;
+          isolation: isolate;
         }
 
         .jubilee-entrance-wrapper .jubilee-entrance {
           position: relative;
           width: 100%;
           height: 100%;
-          min-height: 0;
+          min-height: 0 !important;
           max-height: 100%;
           overflow: hidden;
         }
 
         /* INVITATION SCENES */
+
         .jubilee-app.invitation-active {
           width: 100%;
           height: 100vh;
           height: 100svh;
-          overflow-x: hidden;
+          height: 100dvh;
+          overflow-x: clip;
           overflow-y: auto;
           overscroll-behavior-y: contain;
           touch-action: pan-y;
@@ -315,7 +301,9 @@ function App() {
 
         .jubilee-invitation {
           position: relative;
+          display: block;
           width: 100%;
+          min-width: 0;
           min-height: 100%;
           margin: 0;
           padding: 0;
@@ -325,28 +313,88 @@ function App() {
         .jubilee-invitation > section {
           position: relative;
           width: 100%;
+          min-width: 0;
           min-height: 100vh;
           min-height: 100svh;
+          min-height: 100dvh;
         }
 
+        /* MOBILE WIDTHS */
+
         @media (max-width: 600px) {
+          .jubilee-app {
+            width: 100%;
+            max-width: 100vw;
+            max-width: 100dvw;
+          }
+
           .jubilee-app.entrance-active {
             width: 100%;
+            height: 100vh;
             height: 100svh;
+            height: 100dvh;
             overflow: hidden !important;
           }
 
           .jubilee-entrance-wrapper {
             width: 100%;
-            height: 100svh;
+            height: 100%;
             overflow: hidden;
           }
 
           .jubilee-entrance-wrapper .jubilee-entrance {
             width: 100%;
-            height: 100svh;
-            min-height: 0;
+            height: 100%;
+            min-height: 0 !important;
             overflow: hidden;
+          }
+
+          .jubilee-app.invitation-active {
+            width: 100%;
+            height: 100vh;
+            height: 100svh;
+            height: 100dvh;
+            overflow-x: clip;
+            overflow-y: auto;
+          }
+
+          .jubilee-invitation,
+          .jubilee-invitation > section {
+            width: 100%;
+            min-width: 0;
+          }
+        }
+
+        /* SMALL PHONES */
+
+        @media (max-width: 360px) {
+          .jubilee-app {
+            font-size: 14px;
+          }
+
+          .jubilee-invitation > section {
+            max-width: 100%;
+          }
+        }
+
+        /* TABLETS */
+
+        @media (min-width: 601px) and (max-width: 1024px) {
+          .jubilee-app {
+            width: 100%;
+          }
+
+          .jubilee-invitation > section {
+            width: 100%;
+          }
+        }
+
+        /* SAFE AREA SUPPORT */
+
+        @supports (padding: env(safe-area-inset-top)) {
+          .jubilee-app {
+            padding-left: env(safe-area-inset-left);
+            padding-right: env(safe-area-inset-right);
           }
         }
 

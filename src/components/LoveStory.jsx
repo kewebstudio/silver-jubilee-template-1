@@ -18,13 +18,11 @@ function LoveStory() {
     }),
   };
 
-  // Original image paths preserved
   const weddingPhoto = "/images/couple-then.jpg";
   const presentPhoto = "/images/couple-2.jpg";
 
   return (
     <section className="jubilee-love-story">
-      {/* Original background artwork */}
       <div className="story-artwork" />
 
       {/* THEN - Wedding photograph */}
@@ -75,7 +73,7 @@ function LoveStory() {
         <span className="photo-error-message">Image not found</span>
       </motion.div>
 
-      {/* Story content - kept within the clear centre area */}
+      {/* Story content */}
       <div className="story-content">
         <motion.span
           className="story-eyebrow"
@@ -173,15 +171,18 @@ function LoveStory() {
         .jubilee-love-story {
           position: relative;
           width: 100%;
+          height: 100vh;
           height: 100svh;
-          min-height: 600px;
+          height: 100dvh;
+          min-height: 0;
           overflow: hidden;
           isolation: isolate;
           background: #302932;
           font-family: 'Montserrat', sans-serif;
         }
 
-        /* Original background artwork - unchanged */
+        /* Original background artwork */
+
         .story-artwork {
           position: absolute;
           inset: 0;
@@ -192,7 +193,8 @@ function LoveStory() {
           background-repeat: no-repeat;
         }
 
-        /* Photographs - original paths and positions preserved */
+        /* Photographs */
+
         .story-photo {
           position: absolute;
           z-index: 2;
@@ -235,8 +237,10 @@ function LoveStory() {
           display: none;
         }
 
+        /* Both photos moved down */
+
         .story-photo-then {
-          top: 23.5%;
+          top: 26%;
           left: 12.5%;
           width: 37%;
           height: 19%;
@@ -244,17 +248,18 @@ function LoveStory() {
         }
 
         .story-photo-now {
-          top: 25.3%;
+          top: 27.8%;
           left: 52%;
           width: 35%;
           height: 19%;
           border-radius: 3px;
         }
 
-        /* Compact text layout in the open centre of the artwork */
+        /* Story content moved down */
+
         .story-content {
           position: absolute;
-          top: 48%;
+          top: 53%;
           left: 12%;
           width: 76%;
           display: flex;
@@ -277,7 +282,7 @@ function LoveStory() {
         .story-heading {
           margin: 9px 0 0;
           font-family: 'Great Vibes', cursive;
-          font-size: clamp(31px, 7.8vw, 41px);
+          font-size: clamp(29px, 7.8vw, 45px);
           font-weight: 400;
           line-height: 1.08;
           color: #513b37;
@@ -315,7 +320,7 @@ function LoveStory() {
           max-width: 265px;
           margin: 0 auto;
           font-family: 'Cormorant Garamond', serif;
-          font-size: clamp(14px, 3.8vw, 17px);
+          font-size: clamp(13px, 3.8vw, 18px);
           font-weight: 600;
           line-height: 1.38;
           color: #51403a;
@@ -327,12 +332,12 @@ function LoveStory() {
           margin-top: 13px;
           width: 100%;
           font-family: 'Great Vibes', cursive;
-          font-size: clamp(27px, 7vw, 35px);
+          font-size: clamp(22px, 7vw, 39px);
           font-weight: 400;
           line-height: 1.15;
           color: #17385f;
           text-align: center;
-          white-space: nowrap;
+          overflow-wrap: anywhere;
           text-shadow: 0 1px 2px rgba(255,255,255,0.8);
         }
 
@@ -348,9 +353,10 @@ function LoveStory() {
         }
 
         /* Scroll prompt */
+
         .story-scroll {
           position: absolute;
-          bottom: 2%;
+          bottom: max(2%, env(safe-area-inset-bottom));
           left: 0;
           width: 100%;
           display: flex;
@@ -360,11 +366,13 @@ function LoveStory() {
           z-index: 4;
           color: #68513e;
           font-family: 'Montserrat', sans-serif;
-          font-size: 7px;
+          font-size: clamp(6px, 1.8vw, 8px);
           font-weight: 800;
           letter-spacing: 0.13em;
           text-shadow: 0 1px 2px rgba(255,255,255,0.8);
           text-align: center;
+          padding-inline: 8px;
+          pointer-events: none;
         }
 
         .story-scroll span:last-child {
@@ -373,23 +381,24 @@ function LoveStory() {
         }
 
         /* Desktop */
+
         @media (min-width: 700px) {
           .story-photo-then {
-            top: 23%;
+            top: 26%;
             left: 28%;
             width: 20%;
             height: 20%;
           }
 
           .story-photo-now {
-            top: 25%;
+            top: 28%;
             left: 52%;
             width: 20%;
             height: 20%;
           }
 
           .story-content {
-            top: 48%;
+            top: 53%;
             left: 25%;
             width: 50%;
           }
@@ -409,31 +418,72 @@ function LoveStory() {
         }
 
         /* Short mobile screens */
-        @media (max-height: 700px) {
+
+        @media (max-height: 700px) and (max-width: 699px) {
+          .story-photo-then {
+            top: 24%;
+            height: 17%;
+          }
+
+          .story-photo-now {
+            top: 26%;
+            height: 17%;
+          }
+
           .story-content {
-            top: 47%;
+            top: 48%;
           }
 
           .story-heading {
-            margin-top: 7px;
-            font-size: clamp(29px, 7.2vw, 37px);
+            margin-top: 6px;
+            font-size: clamp(27px, 7vw, 37px);
           }
 
           .story-divider {
-            margin: 6px auto;
+            margin: 5px auto;
           }
 
           .story-description {
-            font-size: 14px;
-            line-height: 1.32;
+            font-size: clamp(12px, 3.5vw, 15px);
+            line-height: 1.3;
           }
 
           .story-couple-names {
-            margin-top: 9px;
+            margin-top: 8px;
           }
 
           .story-years {
             margin-top: 3px;
+          }
+        }
+
+        /* Extra narrow phones */
+
+        @media (max-width: 350px) {
+          .story-photo-then {
+            top: 25%;
+            left: 9%;
+            width: 39%;
+          }
+
+          .story-photo-now {
+            top: 27%;
+            left: 53%;
+            width: 37%;
+          }
+
+          .story-content {
+            top: 51%;
+            left: 8%;
+            width: 84%;
+          }
+
+          .story-heading {
+            font-size: 29px;
+          }
+
+          .story-description {
+            font-size: 13px;
           }
         }
 

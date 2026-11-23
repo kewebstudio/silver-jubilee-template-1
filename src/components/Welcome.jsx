@@ -3,7 +3,7 @@ import { motion } from "framer-motion";
 import JubileeData from "../data/jubileeData";
 
 function Welcome() {
-  const { couple, event } = JubileeData;
+  const { couple } = JubileeData;
 
   const fadeUp = {
     hidden: { opacity: 0, y: 20 },
@@ -20,11 +20,8 @@ function Welcome() {
 
   return (
     <section className="jubilee-welcome">
-
-      {/* Original welcome artwork */}
       <div className="welcome-artwork" />
 
-      {/* Couple photograph inside the gold circle */}
       <div className="welcome-photo-position">
         <motion.div
           className="welcome-photo"
@@ -43,7 +40,6 @@ function Welcome() {
         </motion.div>
       </div>
 
-      {/* Couple names ON the silver ribbon */}
       <motion.div
         className="welcome-ribbon"
         initial={{ opacity: 0, y: 12 }}
@@ -62,7 +58,6 @@ function Welcome() {
           aria-label={couple.displayNames}
         >
           <defs>
-            {/* Shallow upward curve matching the ribbon's centre panel */}
             <path
               id="jubilee-ribbon-curve"
               d="M 48 52 Q 175 27 302 52"
@@ -81,9 +76,7 @@ function Welcome() {
         </svg>
       </motion.div>
 
-      {/* Anniversary number and details on the podium */}
       <div className="welcome-podium">
-
         <motion.div
           className="podium-number-wrap"
           variants={fadeUp}
@@ -115,10 +108,8 @@ function Welcome() {
         >
           {couple.title}
         </motion.span>
-
       </div>
 
-      {/* Scroll indicator */}
       <motion.div
         className="welcome-scroll"
         initial={{ opacity: 0 }}
@@ -144,15 +135,17 @@ function Welcome() {
         .jubilee-welcome {
           position: relative;
           width: 100%;
+          height: 100vh;
           height: 100svh;
-          min-height: 600px;
+          height: 100dvh;
+          min-height: 0;
           overflow: hidden;
           isolation: isolate;
           background: #302932;
           font-family: 'Montserrat', sans-serif;
+          contain: layout paint;
         }
 
-        /* Original artwork */
         .welcome-artwork {
           position: absolute;
           inset: 0;
@@ -163,10 +156,11 @@ function Welcome() {
           background-repeat: no-repeat;
         }
 
-        /* Couple photograph */
+        /* BIGGER COUPLE PHOTO - MOVED LOWER */
+
         .welcome-photo-position {
           position: absolute;
-          top: 30.5%;
+          top: 35%;
           left: 0;
           width: 100%;
           display: flex;
@@ -176,7 +170,7 @@ function Welcome() {
         }
 
         .welcome-photo {
-          width: min(52vw, 215px);
+          width: clamp(150px, min(70vw, 38svh), 290px);
           aspect-ratio: 1 / 1;
           flex-shrink: 0;
           overflow: hidden;
@@ -189,18 +183,20 @@ function Welcome() {
           display: block;
           width: 100%;
           height: 100%;
+          max-width: none;
           object-fit: cover;
-          object-position: center 35%;
+          object-position: center 36%;
           border-radius: 50%;
         }
 
-        /* Ribbon text positioning */
+        /* SILVER RIBBON */
+
         .welcome-ribbon {
           position: absolute;
           top: 65.5%;
           left: 0;
           width: 100%;
-          height: 75px;
+          height: clamp(55px, 11svh, 90px);
           z-index: 5;
           pointer-events: none;
         }
@@ -215,7 +211,7 @@ function Welcome() {
         .ribbon-name {
           fill: #102b55;
           font-family: 'Great Vibes', cursive;
-          font-size: 29px;
+          font-size: clamp(21px, 7.2vw, 35px);
           font-weight: 700;
           paint-order: stroke;
           stroke: rgba(255, 255, 255, 0.95);
@@ -223,7 +219,8 @@ function Welcome() {
           stroke-linejoin: round;
         }
 
-        /* Podium text */
+        /* ANNIVERSARY PODIUM */
+
         .welcome-podium {
           position: absolute;
           top: 76.5%;
@@ -235,6 +232,7 @@ function Welcome() {
           text-align: center;
           z-index: 3;
           pointer-events: none;
+          padding-inline: 12px;
         }
 
         .podium-number-wrap {
@@ -247,7 +245,7 @@ function Welcome() {
         .podium-number {
           display: block;
           font-family: 'Cormorant Garamond', serif;
-          font-size: clamp(60px, 17vw, 78px);
+          font-size: clamp(48px, min(17vw, 12svh), 84px);
           font-weight: 700;
           line-height: 0.9;
           letter-spacing: -3px;
@@ -259,30 +257,34 @@ function Welcome() {
         }
 
         .podium-title {
-          margin-top: 6px;
+          margin-top: clamp(3px, 0.8svh, 6px);
           font-family: 'Cormorant Garamond', serif;
-          font-size: clamp(15px, 4.2vw, 20px);
+          font-size: clamp(12px, 4.2vw, 20px);
           font-weight: 700;
-          letter-spacing: 0.18em;
+          letter-spacing: clamp(0.1em, 0.18em, 0.18em);
           text-transform: uppercase;
           color: #142541;
           text-shadow: 0 1px 2px rgba(255,255,255,0.95);
+          max-width: 100%;
+          overflow-wrap: anywhere;
         }
 
         .podium-tagline {
-          margin-top: 5px;
+          margin-top: 4px;
           font-family: 'Cormorant Garamond', serif;
-          font-size: clamp(24px, 4.0vw, 18px);
+          font-size: clamp(15px, 4vw, 20px);
           font-weight: 600;
           color: #263957;
           text-shadow: 0 1px 2px rgba(255,255,255,0.95);
+          max-width: 100%;
+          overflow-wrap: anywhere;
         }
 
+        /* SCROLL INDICATOR */
 
-        /* Scroll prompt */
         .welcome-scroll {
           position: absolute;
-          bottom: 0.8%;
+          bottom: max(0.8%, env(safe-area-inset-bottom));
           left: 0;
           width: 100%;
           display: flex;
@@ -292,7 +294,7 @@ function Welcome() {
           z-index: 6;
           color: #142541;
           font-family: 'Montserrat', sans-serif;
-          font-size: 7px;
+          font-size: clamp(6px, 1.8vw, 8px);
           font-weight: 800;
           letter-spacing: 0.14em;
           text-shadow: 0 1px 2px rgba(255,255,255,0.95);
@@ -301,19 +303,20 @@ function Welcome() {
 
         .scroll-arrow {
           display: block;
-          font-size: 20px;
+          font-size: clamp(17px, 5vw, 22px);
           line-height: 1;
           color: #142541;
         }
 
-        /* Desktop */
+        /* DESKTOP */
+
         @media (min-width: 700px) {
           .welcome-photo-position {
-            top: 29.5%;
+            top: 34%;
           }
 
           .welcome-photo {
-            width: min(26vw, 285px);
+            width: min(32vw, 340px, 38svh);
           }
 
           .welcome-ribbon {
@@ -332,24 +335,79 @@ function Welcome() {
           .podium-number {
             font-size: 84px;
           }
+
+          .podium-title {
+            font-size: 20px;
+          }
+
+          .podium-tagline {
+            font-size: 18px;
+          }
         }
 
-        /* Short mobile screens */
-        @media (max-height: 700px) {
+        /* SHORT MOBILE SCREENS */
+
+        @media (max-height: 700px) and (max-width: 699px) {
           .welcome-photo-position {
-            top: 34%;
+            top: 32%;
           }
 
           .welcome-photo {
-            width: min(52vw, 205px);
+            width: clamp(125px, min(60vw, 31svh), 225px);
           }
 
           .welcome-ribbon {
-            top: 62.4%;
+            top: 62.5%;
+            height: 60px;
           }
 
           .welcome-podium {
-            top: 70%;
+            top: 72%;
+          }
+
+          .podium-number {
+            font-size: clamp(43px, 13vw, 65px);
+          }
+
+          .welcome-scroll {
+            bottom: max(0.5%, env(safe-area-inset-bottom));
+          }
+        }
+
+        /* EXTRA NARROW PHONES */
+
+        @media (max-width: 350px) {
+          .welcome-photo-position {
+            top: 32%;
+          }
+
+          .welcome-photo {
+            width: clamp(120px, 60vw, 190px);
+          }
+
+          .welcome-ribbon {
+            top: 64%;
+          }
+
+          .ribbon-name {
+            font-size: 21px;
+          }
+
+          .welcome-podium {
+            top: 74%;
+          }
+
+          .podium-number {
+            font-size: 48px;
+          }
+
+          .podium-title {
+            font-size: 12px;
+            letter-spacing: 0.12em;
+          }
+
+          .podium-tagline {
+            font-size: 15px;
           }
         }
 
